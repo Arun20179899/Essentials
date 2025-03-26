@@ -1,7 +1,9 @@
 package workbook;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import resources.Utils;
@@ -50,7 +52,12 @@ public class DataDriven extends Utils {
 //                        after you grab the "Orders" testcase row than pull all the data of that row and feed into test
                         Iterator<Cell> cv = r.cellIterator();
                         while (cv.hasNext()) {
-                            list.add(cv.next().getStringCellValue());
+                            Cell c = cv.next();
+                            if (c.getCellType() == CellType.STRING) {
+                                list.add(c.getStringCellValue());
+                            } else {
+                                list.add(NumberToTextConverter.toText(c.getNumericCellValue()));
+                            }
                         }
                     }
                 }
