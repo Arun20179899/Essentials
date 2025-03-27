@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 
 public class Utils {
     public FileInputStream getExcelFilePath() throws FileNotFoundException {
-        FileInputStream fis = new FileInputStream("C:\\Users\\lenovo\\Documents\\GetData.xlsx");
+        FileInputStream fis = new FileInputStream("C:\\Users\\Arun\\Documents\\GetData.xlsx");
         return fis;
     }
 }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class DataDriven extends Utils {
-    public ArrayList<String> getData(String testcaseName) throws IOException {
+    public ArrayList<String> getData(String sheetName, String columnName, String testcaseName) throws IOException {
         ArrayList<String> list = new ArrayList<String>();
 //        Get hold of Excel File
         XSSFWorkbook workbook = new XSSFWorkbook(getExcelFilePath());
@@ -23,7 +23,7 @@ public class DataDriven extends Utils {
         int sheets = workbook.getNumberOfSheets();
         System.out.println(sheets);
         for (int i = 0; i < sheets; i++) {
-            if (workbook.getSheetName(i).equalsIgnoreCase("TestData")) {
+            if (workbook.getSheetName(i).equalsIgnoreCase(sheetName)) {
                 XSSFSheet sheet = workbook.getSheetAt(i);
 //                Identify TestCases column by scanning the entire 1st row
                 Iterator<Row> rows = sheet.rowIterator(); // sheet is collection of row
@@ -35,7 +35,7 @@ public class DataDriven extends Utils {
                 int column = 0;
                 while (cells.hasNext()) {
                     Cell value = cells.next();
-                    if (value.getStringCellValue().equalsIgnoreCase("TestCase")) {
+                    if (value.getStringCellValue().equalsIgnoreCase(columnName)) {
 
                         column = k; // get the index of the column name
                     }
